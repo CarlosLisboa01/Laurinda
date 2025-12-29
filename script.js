@@ -147,6 +147,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // State
+    const progressEl = document.getElementById('progress-bar');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    const enterFullscreenIcon = document.getElementById('enter-fullscreen');
+    const exitFullscreenIcon = document.getElementById('exit-fullscreen');
+
+    // Audio - Progress Logic
+    audioPlayer.addEventListener('timeupdate', () => {
+        if (audioPlayer.duration) {
+            const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            progressEl.style.width = `${percent}%`;
+        }
+    });
+
+    // Fullscreen Logic
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(e => {
+                console.log(`Error attempting to enable fullscreen: ${e.message} (${e.name})`);
+            });
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    }
+
+    function updateFullscreenBtn() {
+        if (document.fullscreenElement) {
+            enterFullscreenIcon.style.display = 'none';
+            exitFullscreenIcon.style.display = 'block';
+        } else {
+            enterFullscreenIcon.style.display = 'block';
+            exitFullscreenIcon.style.display = 'none';
+        }
+    }
+
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    document.addEventListener('fullscreenchange', updateFullscreenBtn);
+
     // Bind Events
     nextBtn.addEventListener('click', () => {
         nextSlide();
@@ -169,6 +209,32 @@ document.addEventListener('DOMContentLoaded', () => {
         // Remove listener after first interaction
         document.removeEventListener('click', unlockAudio);
     }, { once: true });
+
+    // Idle Detection (Auto-hide UI)
+    let idleTimer;
+    const idleTimeoutSeconds = 10;
+
+    function resetIdleTimer() {
+        document.body.classList.remove('user-inactive');
+        clearTimeout(idleTimer);
+
+        if (document.fullscreenElement) {
+            // Optional: only hide in fullscreen? Or always? User asked generally.
+            // Applying always for consistent experience.
+        }
+
+        idleTimer = setTimeout(() => {
+            document.body.classList.add('user-inactive');
+        }, idleTimeoutSeconds * 1000);
+    }
+
+    // Monitor interactions
+    document.addEventListener('mousemove', resetIdleTimer);
+    document.addEventListener('click', resetIdleTimer);
+    document.addEventListener('keydown', resetIdleTimer);
+
+    // Initial trigger
+    resetIdleTimer();
 
     // Start
     showSlide(0); // Load first immediately
