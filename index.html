@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Em Memória de Dona Laurinda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Full Screen Slideshow Background -->
+    <div id="slideshow-bg">
+        <!-- Images injected here -->
+    </div>
+
+    <!-- Vignette & Texture Overlay -->
+    <div class="texture-overlay"></div>
+
+    <!-- Main Content Overlay -->
+    <main class="content-wrapper">
+        <header>
+            <h1 class="name">Família Laurinda e Alfredo</h1>
+            <p class="dates">Ano Novo 2026</p>
+        </header>
+
+        <section class="quote-card">
+            <p>"Família Laurinda e Alfredo"</p>
+        </section>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button id="prev-btn" class="control-btn" title="Anterior">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                </svg>
+            </button>
+            <button id="pause-btn" class="control-btn" title="Pausar/Tocar">
+                <svg id="pause-icon" viewBox="0 0 24 24">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                </svg>
+                <svg id="play-icon" viewBox="0 0 24 24" style="display:none;">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+            </button>
+            <button id="next-btn" class="control-btn" title="Próximo">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="photo-counter">
+            <span id="current-photo">1</span> / <span id="total-photos">--</span>
+        </div>
+    </main>
+
+    <script src="image_list.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
