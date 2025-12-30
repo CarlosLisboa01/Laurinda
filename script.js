@@ -18,9 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Audio Configuration
     const playlist = [
-        'Music/PEDRO VALENÇA - Canção da Família (Vídeo Oficial) [P-5lHK-nRZo].mp3',
-        'Music/Minha Família é uma Benção ｜ Frei Gilson [sHRPneSwevc].mp3',
-        'Music/Utopia-｜-Cover-_MdFnhZ64DaA_.mp3'
+        'Music/Coral-Palestrina-As-sementes-que-me-deste - 1.mp3',
+        'Music/Minha Família é uma Benção - 2.mp3',
+        'Music/PEDRO VALENÇA - Canção da Família - 3.mp3',
+        'Music/Utopia - 4.mp3'
     ];
     let currentTrackIndex = 0;
     const audioPlayer = new Audio();
@@ -198,6 +199,18 @@ document.addEventListener('DOMContentLoaded', () => {
         prevSlide();
         if (isPlaying) startTimer();
     });
+
+    // Volume Control Logic
+    const volumeSlider = document.getElementById('volume-slider');
+
+    // Set initial volume
+    if (volumeSlider) {
+        audioPlayer.volume = volumeSlider.value;
+
+        volumeSlider.addEventListener('input', (e) => {
+            audioPlayer.volume = e.target.value;
+        });
+    }
 
     pauseBtn.addEventListener('click', togglePlay);
 
